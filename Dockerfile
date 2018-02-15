@@ -31,4 +31,4 @@ RUN npm run build:prod
 
 EXPOSE 7001
 
-CMD ["npm","run","deploy:prod"]
+CMD ["npm","run","deploy:docker"]

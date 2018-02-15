@@ -1,6 +1,6 @@
 const path = require('path')
 const fs = require('fs')
-const {KEYS, SITE_FILE, LOGGER, VUE_SSR, STATIC, MIDDLEWARE, SECURITY, MYSQL} = require('./default')
+const {KEYS, SITE_FILE, LOGGER, VUE_SSR, STATIC, MIDDLEWARE, SECURITY, MYSQL, domainWhiteList} = require('./default')
 module.exports = app => {
   const exports = {}
 
@@ -29,10 +29,17 @@ module.exports = app => {
   exports.keys = KEYS
   exports.mysql = MYSQL
   exports.middleware = MIDDLEWARE
+  exports.errorHandler = {
+    match: '/api'
+  }
   exports.security = {
     csrf: {
       enable: SECURITY.CSRF
-    }
+    },
+    methodnoallow: {
+      enable: false
+    },
+    domainWhiteList
   }
   return exports
 }

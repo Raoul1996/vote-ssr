@@ -8,7 +8,7 @@
       "exec_mode": "fork",
       "error_file": "./logs/vote-err.log",
       "out_file": "./logs/vote-out.log",
-      "watch": false
+      "watch": false,
     }
   ]
 }

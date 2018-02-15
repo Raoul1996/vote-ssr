@@ -1,5 +1,16 @@
 // default config
+const ip = require('ip')
+const localIP = ip.address()
+const domainWhiteList = [];
+[7001].forEach(port => {
+  domainWhiteList.push(`http://localhost:${port}`)
+  domainWhiteList.push(`http://127.0.0.1:${port}`)
+  domainWhiteList.push(`http://${localIP}:${port}`)
+})
+domainWhiteList.push('https://ssr.raoul1996.cn')
+domainWhiteList.push('http://ssr.raoul1996.cn')
 module.exports = {
+  domainWhiteList,
   KEYS: 'lost heart, lost soul',
   SITE_FILE: 'app/web/asset/images/favicon.ico',
   VUE_SSR: 'app/web/view/layout.html',

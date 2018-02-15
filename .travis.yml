@@ -44,7 +44,7 @@ after_success:
 - ssh ubuntu@123.207.252.230 'pm2 stop vote -f '
 - ssh ubuntu@123.207.252.230 'cd /usr/share/nginx/html/ssr && npm run deploy:prod'
 # 查看 pm2 的状态
-- ssh ubuntu@123.207.252.230 'pm2 show index'
+- ssh ubuntu@123.207.252.230 'pm2 show vote'
 after_script:
 
 branches:
