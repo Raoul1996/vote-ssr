@@ -11,6 +11,9 @@
     "array-bracket-spacing": "off",
     "no-unused-vars": "off",
     "no-else-return": "off",
+    "semi": 0,
+    "object-curly-spacing": 0,
+    "no-extra-semi":"error",
     "strict": "off",
     "linebreak-style": "off",
     "no-irregular-whitespace": [

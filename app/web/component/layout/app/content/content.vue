@@ -1,9 +1,7 @@
-<template>
-  <div class="main">
-    <div class="page-container page-component">
-      <slot name="content"></slot>
-    </div>
-  </div>
+<template lang="pug">
+  .main
+    .page-container.page-component
+      slot(name="content")
 </template>
 <style>
   @import "content.css";

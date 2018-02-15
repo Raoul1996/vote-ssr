@@ -5,9 +5,14 @@ module.exports = () => {
   const skipExt = [ '.png', '.jpeg', '.jpg', '.ico', '.gif' ];
   return function* (next) {
     const start = new Date().getTime();
-
+    // 在执行 middleware 的时候，一旦抛出了 error，便进入 catch 流程，9999 对应非预期错误
     yield* next;
-
+    // if (this.type === 'application/json' && this.status === 200) {
+    //   this.body = {
+    //     code: 0,
+    //     data: this.body
+    //   }
+    // }
     const rs = Math.ceil(new Date().getTime() - start);
 
     this.set('X-Response-Time', rs);

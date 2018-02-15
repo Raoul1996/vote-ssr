@@ -1,35 +1,38 @@
-const path = require('path');
-const fs = require('fs');
+const path = require('path')
+const fs = require('fs')
+const {KEYS, SITE_FILE, LOGGER, VUE_SSR, STATIC, MIDDLEWARE, SECURITY, MYSQL} = require('./default')
 module.exports = app => {
-  const exports = {};
+  const exports = {}
 
   exports.siteFile = {
-    '/favicon.ico': fs.readFileSync(path.join(app.baseDir, 'app/web/asset/images/favicon.ico'))
-  };
+    '/favicon.ico': fs.readFileSync(path.join(app.baseDir, SITE_FILE))
+  }
 
   exports.view = {
     cache: false
-  };
+  }
 
   exports.vuessr = {
-    layout: path.join(app.baseDir, 'app/web/view/layout.html'),
-  };
+    layout: path.join(app.baseDir, VUE_SSR)
+  }
 
   exports.logger = {
-    consoleLevel: 'DEBUG',
-    dir: path.join(app.baseDir, 'logs')
-  };
+    consoleLevel: LOGGER.LEVEL,
+    dir: path.join(app.baseDir, LOGGER.DIR)
+  }
 
   exports.static = {
-    prefix: '/public/',
-    dir: path.join(app.baseDir, 'public')
-  };
+    prefix: STATIC.PREFIX,
+    dir: path.join(app.baseDir, STATIC.DIR)
+  }
 
-  exports.keys = '123456';
-
-  exports.middleware = [
-    'access'
-  ];
-
-  return exports;
-};
+  exports.keys = KEYS
+  exports.mysql = MYSQL
+  exports.middleware = MIDDLEWARE
+  exports.security = {
+    csrf: {
+      enable: SECURITY.CSRF
+    }
+  }
+  return exports
+}

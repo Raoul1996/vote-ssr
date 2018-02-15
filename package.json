@@ -1,7 +1,7 @@
 {
-  "name": "egg-vue-webpack-spa-boilerplate",
+  "name": "vote",
+  "description": "基于 Egg + Vue + Webpack3 单页面服务端客户端渲染同构工程骨架项目.",
   "version": "1.0.0",
-  "description": "基于 easywebpack-vue 和 egg-view-vue-ssr插件的 egg + vue 服务端渲染同构工程骨架项目",
   "scripts": {
     "debug": "egg-bin debug",
     "build": "cross-env easy clean && easy build prod",
@@ -10,9 +10,13 @@
     "build:prod": "cross-env easy clean && easy build prod",
     "start": "node index.js",
     "start:test": "cross-env EGG_SERVER_ENV=test node index.js",
+    "deploy:prod": "cross-env EGG_SERVER_ENV=prod pm2 start start.json",
+    "deploy:docker": "cross-env EGG_SERVER_ENV=prod pm2-runtime start.json --7001",
     "start:prod": "cross-env EGG_SERVER_ENV=prod NODE_ENV=production npm start",
     "lint": "eslint .",
-    "fix": "eslint --fix ."
+    "fix": "eslint --fix .",
+    "docker": "docker run -p 8080:7001 raoul1996/vote:latest",
+    "docker:prod": "docker run -p 8080:7001 -d raoul1996/vote:latest"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -20,6 +24,7 @@
     "egg-bin": "^4.3.7",
     "egg-cors": "^2.0.0",
     "egg-logger": "^1.5.0",
+    "egg-mysql": "^3.0.0",
     "egg-validate": "^1.0.0",
     "egg-view-vue-ssr": "^3.0.2",
     "element-ui": "^2.0.8",
@@ -28,6 +33,7 @@
     "mint-ui": "^2.2.9",
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.17.1",
+    "pug": "^2.0.0-rc.4",
     "vue": "^2.5.0",
     "vue-hot-reload-api": "^2.1.0",
     "vue-router": "^3.0.1",
@@ -78,11 +84,19 @@
   "ci": {
     "version": "6, 7, 8, 9"
   },
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hubcarl/egg-vue-webpack-boilerplate.git"
+    "url": "git+https://github.com/Raoul1996/vote-ssr.git"
   },
-  "author": "hubcarl@126.com",
-  "license": "MIT",
-  "homepage": "https://github.com/hubcarl/egg-vue-webpack-boilerplate"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Raoul1996/vote-ssr/issues"
+  },
+  "homepage": "https://github.com/Raoul1996/vote-ssr#readme"
 }

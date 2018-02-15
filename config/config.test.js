@@ -1,7 +1,5 @@
-
-
 module.exports = app => {
-  const exports = {};
+  const exports = {}
 
-  return exports;
-};
+  return exports
+}

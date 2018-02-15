@@ -1,177 +1,38 @@
-# egg-vue-webpack-boilerplate
+# egg-vue-ssr-spa
 
-基于 Egg + Vue + Webpack3/Webpack2 多页面和单页面服务端客户端渲染同构工程骨架项目.
+> [vue-vote](https://github.com/Raoul1996/vue-vote.git) AND [koa-vote](https://github.com/Raoul1996/koa-vote.git)  ssr(server side render) version
 
-## 版本
+脚手架文档[在这里](OLDREADME.md)
 
+## 技术栈
 - Egg 版本： ^2.x.x
-- Node 版本: Node ^8.x.x+,  Node 6.x.x 版本请见 [Egg 1.0 + Node6分支](https://github.com/hubcarl/egg-vue-webpack-boilerplate/tree/node6)
+- Node 版本: Node ^8.x.x+
 - Webpack 版本: ^3.8.1, 对应 `easywebpack-vue` 版本为 ^3.5.0
 - Vue 版本: ^2.5.0
 
-## 文档
+## 参考文章
+- [Docker for Devs: Hot Module Reloading & Live Editing in Containers](http://www.summa.com/blog/docker-for-developers-hot-module-reloading-live-editing-in-containers)
 
-- http://hubcarl.github.io/easywebpack/vue/rule
-- https://zhuanlan.zhihu.com/easywebpack
+## 踩坑日志
 
+#### 20171230 配置 travis-ci、项目初次尝试
+- egg 在编译的时候需要 `.eslintrc` 配置文件，所以部署到服务器的时候需要将项目中的隐藏文件一起打包,解决方法见 [.travis.yml](.travis.yml) 中这个部分：
 
-## 1.特性
+   ```
+    # 压缩，为上传准备
+    # 因为 egg 进行编译的时候会需要 ESLint 的配置文件，所以隐藏文件需要打包
+    - tar -jcf votes.tar.bz2 * .*
+    ```
+- 在创建新的 router 之后，需要重启服务
+- [关闭安全威胁csrf防范？](https://github.com/eggjs/egg/issues/509)，这个设置极其不安全
+- 配置数据库是在 config 下面的 plugin 中开启，在 config/config.${env}.js 配置各个环境的数据库连接信息
 
-- 支持 server 和 client 端代码修改, webpack 时时编译和热更新, `npm start` 一键启动应用
+## 开发日志
 
-- 基于 vue + vuex + vue-router + axios 单页面服务器客户端同构实现
-
-- 支持开发环境, 测试环境，正式环境 webpack 编译
- 
-
-## 2.依赖
-
-- [easywebpack](https://github.com/hubcarl/easywebpack) ^3.5.2
-- [easywebpack-vue](https://github.com/hubcarl/easywebpack) ^3.5.0
-- [egg-view-vue-ssr](https://github.com/hubcarl/egg-view-vue-ssr) ^3.0.2
-- [egg-webpack](https://github.com/hubcarl/egg-webpack) ^3.2.6
-- [egg-webpack-vue](https://github.com/hubcarl/egg-webpack-vue) ^2.0.0
-
-
-## 3. 使用
-
-#### 3.1 安装cli(非必需)
-
-```bash
-npm install easywebpack-cli -g
-```
-
-^3.5.0 开始， `easywebpack-cli` 已内置 `devDependencies` 中, 无需安装。如果你需要在命令行使用 `easy` 命令, 可以单独全局安装。
-
-#### 3.2 安装依赖
-
-```bash
-npm install
-npm start
-```
-
-
-#### 3.3 启动应用
-
-```bash
-npm start
-```
-
-应用访问: http://127.0.0.1:7001
-
-![npm start启动](https://github.com/hubcarl/egg-vue-webpack-boilerplate/blob/feature/green/spa/docs/images/webpack-build.png)
-
-
-#### 3.4 项目构建
-
-```bash
-// 直接运行(编译文件全部在内存里面,本地开发使用)
-npm start
-
-// 编译文件到磁盘打包使用(发布测试环境)
-npm run build:dev 或者 easywebpack build dev
-
-// 编译文件到磁盘打包使用(发布正式环境)
-npm run build 或者 easywebpack build prod
-
-```
-
-## 4. 功能实现
-
-#### 4.1 单页面前端实现
-
-在app/web/page 目录下面创建app目录, app.vue, app.js 文件.
-
-- app.vue 编写界面逻辑, 根元素为layout(自定义组件, 全局注册, 统一的html, meta, header, body)
-
-```html
-<template>
-  <app-layout>
-    <transition name="fade" mode="out-in">
-      <router-view></router-view>
-    </transition>
-  </app-layout>
-</template>
-<style lang="sass">
-
-</style>
-<script type="text/babel">
-  export default {
-    computed: {
-
-    },
-    mounted(){
-
-    }
-  }
-</script>
-```
-
-- app.js 页面调用入口
-
-```javascript
-import { sync } from 'vuex-router-sync';
-import store from 'store/app';
-import router from 'component/app/router';
-import app from './app.vue';
-import App from 'app';
-import Layout from 'component/layout/app';
-
-App.component(Layout.name, Layout);
-
-sync(store, router);
-
-export default App.init({
-  base: '/app',
-  ...app,
-  router,
-  store
-});
-
-```
-
-#### 4.2 单页面后端实现
-
-- 创建controller文件app.js
-
-```javascript
-exports.index = function* (ctx) {
-  yield ctx.render('app/app.js', { url: this.url.replace(/\/app/, '') });
-};
-```
-
-- 添加路由配置
-
-```javascript
-  app.get('/app(/.+)?', app.controller.app.app.index);
-```
-
-
-## 5. 打包部署
-
-http://hubcarl.github.io/easywebpack/vue/build/
-
-
-## 6. 实现原理
-
-### 6.1 本地`npm start`启动流程
-
-![本地启动流程](http://hubcarl.github.io/img/webpack/npm-start.png)
-
-### 6.2 服务端渲染页面访问流程
-
-![服务端渲染页面访问流程](http://hubcarl.github.io/img/webpack/egg-webpack-vue-ssr.png)
-
-
-### 6.3 详细资料
-
-- [Egg+Vue解决方案开发流程](http://hubcarl.github.io/easywebpack/vue/dev/)
-
-- [基于webpack的前端工程解决方案和egg+vue服务端渲染项目实践](http://hubcarl.github.io/blog/2017/04/15/webpack-project/)
-
-- [koa和egg项目webpack内存编译和热更新实现](http://hubcarl.github.io/blog/2017/04/15/egg-webpack/)
-
-
-## License
-
-[MIT](LICENSE)
+### 20170215
+- vue template 使用 pug（jade）
+- 使用 mysql 数据库
+- 配置 Dockerizing
+- 配置 travis-ci
+- 配置 pm2.json
+- **新年快乐**

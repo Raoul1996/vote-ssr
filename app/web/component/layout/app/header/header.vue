@@ -1,28 +1,26 @@
-<template>
-  <header class="header">
-    <div class="container"><h1>
-      <a href="" class="router-link-active">Egg + Vue</a></h1>
-      <ul class="nav">
-        <li class="nav-item"><a href="/" :class="{'active' : selectedMenu === '/'}">Single-Page</a></li>
-      </ul>
-    </div>
-  </header>
+<template lang="pug">
+	header.header
+		.container
+			h1
+				a.router-link-active(href="#") Egg + Vue
+			ul.nav
+				li.nav-item
+					a(href="/", :class="{'active' : selectedMenu === '/'}") Single-Page
+
 </template>
 <style>
-  @import "./header.css";
+	@import "./header.css";
 </style>
 <script type="text/babel">
-  export default{
-    data(){
+  export default {
+    data() {
       return {
-        selectedMenu : '/app'
+        selectedMenu: '/app'
       }
     },
-    computed:{
-
-    },
-    mounted(){
-      this.selectedMenu = window.location.pathname.toLowerCase().replace(/\/$/,'');
+    computed: {},
+    mounted() {
+      this.selectedMenu = window.location.pathname.toLowerCase().replace(/\/$/, '')
     }
   }
 </script>
