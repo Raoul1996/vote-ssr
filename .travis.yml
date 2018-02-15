@@ -41,7 +41,7 @@ after_success:
 # 解压并删除压缩包
 - ssh ubuntu@123.207.252.230 'cd /usr/share/nginx/html/ssr && tar -jxf ssr.tar.bz2 && rm -rf ssr.tar.bz2'
 # 重启，让更改生效
-- ssh ubuntu@123.207.252.230 'pm2 stop index -f '
+- ssh ubuntu@123.207.252.230 'pm2 stop vote -f '
 - ssh ubuntu@123.207.252.230 'cd /usr/share/nginx/html/ssr && npm run deploy:prod'
 # 查看 pm2 的状态
 - ssh ubuntu@123.207.252.230 'pm2 show index'
