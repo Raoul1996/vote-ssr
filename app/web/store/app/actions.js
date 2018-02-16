@@ -3,7 +3,7 @@
 import * as Type from './mutation-type'
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+import axios from '../../service/axios'
 
 Vue.use(Vuex)
 
