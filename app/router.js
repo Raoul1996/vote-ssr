@@ -11,8 +11,9 @@ module.exports = app => {
     .post('/forget', app.controller.user.forget)
     .post('/send', app.controller.user.send)
     .post('/update/:type', app.controller.user.update)
-    .get('/api/article/list', auth, app.controller.app.list)
+    .get('/api/article/list', app.controller.app.list)
     .get('/api/article/:id', app.controller.app.detail)
+    .post('/api/login', app.controller.user.loginApi)
     .get('/*', app.controller.app.index)
   // app.passport.mount('github')
 }

@@ -80,9 +80,9 @@ npm run build 或者 easywebpack build prod
 
 #### 4.1 单页面前端实现
 
-在app/web/page 目录下面创建app目录, app.vue, app.js 文件.
+在app/web/page 目录下面创建app目录, login.vue, login.js 文件.
 
-- app.vue 编写界面逻辑, 根元素为layout(自定义组件, 全局注册, 统一的html, meta, header, body)
+- login.vue 编写界面逻辑, 根元素为layout(自定义组件, 全局注册, 统一的html, meta, header, body)
 
 ```html
 <template>
@@ -107,7 +107,7 @@ npm run build 或者 easywebpack build prod
 </script>
 ```
 
-- app.js 页面调用入口
+- login.js 页面调用入口
 
 ```javascript
 import { sync } from 'vuex-router-sync';

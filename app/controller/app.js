@@ -13,6 +13,7 @@ module.exports = app => {
     }
 
     async list() {
+      console.log(this.ctx.state.user)
       const pageIndex = this.ctx.query.pageIndex
       const pageSize = this.ctx.query.pageSize
       this.ctx.body = Model.getPage(pageIndex, pageSize)

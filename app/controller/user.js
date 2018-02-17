@@ -1,5 +1,3 @@
-const fs = require('fs')
-const cert = fs.readFileSync(__dirname + '/../../id_rsa.enc')
 module.exports = app => {
   class UserController extends app.Controller {
     async index() {
@@ -11,10 +9,15 @@ module.exports = app => {
 
     async login() {
       // 创建 token
-      console.log(233902434902)
+      await this.ctx.render('app/app.js', {
+        url: this.ctx.url.replace(/\/app/, '')
+      })
+    }
+
+    async loginApi() {
       console.log(this.ctx.state)
       const token = app.jwt.sign({
-        data: 'userId',
+        data: 27,
         exp: app.config.jwt.exp
       }, app.config.jwt.secret)
       this.ctx.body = token

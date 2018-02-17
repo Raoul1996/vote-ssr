@@ -24,7 +24,7 @@ instance.defaults.headers.post['Content-Type'] = 'application/json'
 axios.interceptors.request.use = instance.interceptors.request.use
 instance.interceptors.request.use(config => {
   // if (localStorage.getItem('token')) {
-  config.headers.Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoidXNlcklkIiwiZXhwIjoxNTE4ODc1OTAzLCJpYXQiOjE1MTg3ODk1ODV9.rlJ8mTFP5YTrN0SV-jvxVxgM9gEh27ttgSBZ34Im1SM'
+  config.headers.Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoyNywiZXhwIjoxNTE4OTQ2NDY1LCJpYXQiOjE1MTg4NjAxNzN9.7e8bWkoeoAPURipWvrwuvv1-Tol7NeOC5HNIc3KoXz4'
   // }
   if (promiseArr[config.url]) {
     promiseArr[config.url]('操作取消')

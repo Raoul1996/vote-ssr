@@ -3,9 +3,9 @@ const path = require('path')
 module.exports = {
   egg: true,
   framework: 'vue',
-  entry: {'app/app': 'app/web/page/app/app.js'},
+  entry: {'app/app': 'app/web/page/app/login.js'},
   alias: {
-    app: 'app/web/framework/vue/app.js',
+    app: 'app/web/framework/vue/login.js',
     asset: 'app/web/asset',
     component: 'app/web/component',
     framework: 'app/web/framework',

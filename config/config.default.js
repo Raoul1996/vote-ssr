@@ -71,7 +71,7 @@ module.exports = app => {
     algorithm: 'RS256',
     enable: true,
     match(ctx) {
-      const reg = /\/login|\/register|\/forget/i
+      const reg = /\/api|\/register|\/forget/i
       return reg.test(ctx.get('url'))
     }
   }
