@@ -16,7 +16,9 @@
     "lint": "eslint .",
     "fix": "eslint --fix .",
     "docker": "docker run -p 8080:7001 raoul1996/vote:latest",
-    "docker:prod": "docker run -p 8080:7001 -d raoul1996/vote:latest"
+    "docker:prod": "docker run -p 8080:7001 -d raoul1996/vote:latest",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -48,7 +50,8 @@
     "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.5.3",
     "vuex": "^3.0.1",
-    "vuex-router-sync": "^5.0.0"
+    "vuex-router-sync": "^5.0.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "autod-egg": "^1.0.0",
@@ -108,5 +111,6 @@
   "bugs": {
     "url": "https://github.com/Raoul1996/vote-ssr/issues"
   },
-  "homepage": "https://github.com/Raoul1996/vote-ssr#readme"
+  "homepage": "https://github.com/Raoul1996/vote-ssr#readme",
+  "snyk": true
 }
