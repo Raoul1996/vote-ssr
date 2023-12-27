@@ -19,7 +19,7 @@
     "docker:prod": "docker run -p 8080:7001 -d raoul1996/vote:latest"
   },
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^1.6.3",
     "egg": "^2.1.0",
     "egg-bizerror": "^2.1.2",
     "egg-cluster": "^1.14.0",
